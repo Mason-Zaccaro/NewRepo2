@@ -1,4 +1,6 @@
-﻿public interface IComparable<T>
+using System.Diagnostics;
+
+public interface IComparable<T>
 {
     int CompareTo(T other);
 }
@@ -20,13 +22,19 @@ public class Student : IComparable<Student>
     {
         if (other == null) return 0;
 
-        int nameComparison = Name.CompareTo(other.Name);
-        if (nameComparison == 0) return nameComparison;
-
-        int ageComparison = Age.CompareTo(other.Age);
-        if (ageComparison != 0) return ageComparison;
-        
-        return Grade.CompareTo(other.Grade);
+        if (Age == other.Age)
+        {
+            return 1;
+        }
+        else if (Age > other.Age)
+        {
+            return 2;
+        }
+        else if (Age < other.Age)
+        {
+            return -2;
+        }
+        return 0;
     }
 }
 public class Book : IComparable<Book>
@@ -46,13 +54,19 @@ public class Book : IComparable<Book>
     {
         if (other == null) return 0;
 
-        int TitleComparison = Title.CompareTo(other.Title);
-        if (TitleComparison == 0) return TitleComparison;
-
-        int AuthorComparison = Author.CompareTo(other.Author);
-        if (AuthorComparison != 0) return AuthorComparison;
-
-        return Price.CompareTo(other.Price);
+        if (Price == other.Price)
+        {
+            return 1;
+        }
+        else if (Price > other.Price)
+        {
+            return 2;
+        }
+        else if (Price < other.Price)
+        {
+            return -2;
+        }
+        return 0;
     }
 }
 
@@ -62,9 +76,8 @@ public class Program
     {
         List<Student> students = new List<Student>
         {
-            new Student("Антон", 17, 94.0),
-            new Student("Антон", 18, 93.0),
-            new Student("Гоша", 18, 96.0),
+            new Student("Антон", 17, 96.0),
+            new Student("Гоша", 18, 92.0),
             new Student("Коля", 16, 93.0)
         };
 
